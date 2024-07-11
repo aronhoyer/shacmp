@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+# shacmp <sha1,sha256,sha512,sha224,sha384> <file> <checksum>
+
+program="$0"
+
+function usage {
+	if [[ $1 -eq 1 ]]; then
+		echo "Utility to compare SHA checksums."
+		echo ""
+	fi
+
+	echo -e "\e[1;4mUsage:\e[0m $(basename $program) [options] <sha1,sha256,sha512,sha224,sha384> <file> <checksum>"
+	echo ""
+	echo -e "\e[1;4mOptions:\e[0m"
+	echo "  -h,--help  Print this help message"
+	echo ""
+	echo -e "\e[1;4mExamples:\e[0m"
+	echo "  $(basename $program) sha256 /path/to/file.iso \"676db74b3cf41b041d8ca851e08d4988c52f6f5f0ce6a29d876c1eb804f436d7\""
+}
+
+case "$1" in
+	"--help"|"-h")
+		usage 1
+		exit 0
+		;;
+	*) ;;
+esac
+
+alg="$1"
+case "$1" in
+	sha1|sha256|sha512|sha224|sha384)
+		alg="$1sum"
+		;;
+	*)
+		echo -e "\e[1;31mError:\e[0m Algorithm must be one of sha1, sha256, sha512, sha224, sha384"
+		echo ""
+		usage 0
+		exit 1
+		;;
+esac
+
+fpath="$2"
+if ! [[ -f $fpath ]]; then
+	echo -e "\e[1;31mError:\e[0m No such file or directory: $fpath"
+	echo ""
+	usage 0
+	exit 1
+fi
+
+check_src="$3"
+if [[ -z "$check_src" ]]; then
+	echo -e "\e[1;31mError:\e[0m Need a checksum to compare to"
+	echo ""
+	usage 0
+	exit 1
+fi
+
+check="$($alg $fpath)"
+cmp="$check_src  $fpath"
+if [[ $check == $cmp ]]; then
+	echo -e "\e[1;32mSuccess:\e[0m Checksums matched"
+	exit 0
+else
+	echo -e "\e[1;31mError:\e[0m Checksums did \e[1mnot\e[0m match"
+	exit 1
+fi
