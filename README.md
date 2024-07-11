@@ -21,7 +21,7 @@ Options:
   -h,--help  Print this help message
 
 Examples:
-  shacmp sha256 /path/to/file.iso "676db74b3cf41b041d8ca851e08d4988c52f6f5f0ce6a29d876c1eb804f436d7"
+  shacmp sha256 /path/to/file "676db74b3cf41b041d8ca851e08d4988c52f6f5f0ce6a29d876c1eb804f436d7"
 ```
 
 ## License
