@@ -4,11 +4,19 @@ Command line utility to compare SHA checksums.
 
 ## Installation
 
-Not sure yet, but you could `curl` the [raw script file](https://raw.githubusercontent.com/aronhoyer/shacmp/main/shacmp) and output it into your `$PATH`.
+```sh
+curl -o- https://raw.githubusercontent.com/aronhoyer/shacmp/main/install.sh | bash
+```
 
-Remember to make it executable, though.
+```sh
+wget -qO- https://raw.githubusercontent.com/aronhoyer/shacmp/main/install.sh | bash
+```
 
-Alternatively, you can just clone this repo and `cp` or `ln` `./shacmp`.
+This will install `shacmp` to `$HOME/.local/bin` and makes the file executable.
+
+> [!NOTE]
+> There are currently no attempts by the install script to append the install location
+> to your `$PATH`. You will have to do this yourself.
 
 ## Usage
 
