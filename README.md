@@ -1,5 +1,10 @@
 # shacmp
 
+> [!NOTE]
+> Do **not** use this program. I made this because I didn't read the `shasum` manpage.
+> To compare checksums, use `shasum`'s `-c` flag (also read the manpage).
+> My bad ¯\_(ツ)_/¯
+
 Command line utility to compare SHA checksums.
 
 ## Installation
